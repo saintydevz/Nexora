@@ -610,13 +610,78 @@
                 font-size: 2rem;
             }
         }
+
+        .moving-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.2;
+            animation: move 30s infinite linear;
+        }
+
+        .bg-circle:nth-child(1) {
+            width: 500px;
+            height: 500px;
+            background: var(--violet);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .bg-circle:nth-child(2) {
+            width: 700px;
+            height: 700px;
+            background: var(--violet-light);
+            bottom: -200px;
+            right: -200px;
+            animation-delay: 5s;
+        }
+
+        .bg-circle:nth-child(3) {
+            width: 400px;
+            height: 400px;
+            background: #9d5cff;
+            top: 50%;
+            left: 30%;
+            animation-delay: 10s;
+        }
+
+        @keyframes move {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(50px, 50px);
+            }
+            50% {
+                transform: translate(-50px, 100px);
+            }
+            75% {
+                transform: translate(100px, -50px);
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Animated Background Particles -->
+    <div class="moving-bg">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+    
     <div class="particles" id="particles"></div>
     
-    <!-- Header -->
     <header>
         <a href="#" class="logo">
             <i class="fas fa-bolt"></i>
@@ -632,19 +697,18 @@
             </ul>
         </nav>
         
-        <a href="#download" class="download-btn">
+        <a href="https://link-center.net/1232989/mWvpOvXLVRn2" class="download-btn">
             Download Now
         </a>
     </header>
     
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>Unleash the Power of Roblox with Nexora</h1>
             <p>The most advanced and reliable Roblox executor with cutting-edge features, unmatched performance, and a sleek dark-violet interface that stands out from the crowd.</p>
             
             <div class="hero-btns">
-                <a href="#download" class="download-btn">
+                <a href="https://link-center.net/1232989/mWvpOvXLVRn2" class="download-btn">
                     <i class="fas fa-download"></i> Download Now
                 </a>
                 <a href="#features" class="secondary-btn">
@@ -654,13 +718,12 @@
         </div>
         
         <div class="hero-image">
-            <img src="https://i.imgur.com/JQ6Xy9R.png" alt="Nexora Executor Interface">
+            <img src="https://i.ibb.co/N2GzVzmx/Screenshot-2025-06-11-081801.png" alt="Nexora Executor Interface">
             <div class="glow glow-1"></div>
             <div class="glow glow-2"></div>
         </div>
     </section>
     
-    <!-- Features Section -->
     <section id="features">
         <h2 class="section-title">Powerful Features</h2>
         
@@ -766,7 +829,6 @@
         </div>
     </section>
     
-    <!-- How to Use Section -->
     <section class="how-to-use" id="how-to-use">
         <h2 class="section-title">How To Use</h2>
         
@@ -813,7 +875,6 @@
         </div>
     </section>
     
-    <!-- FAQ Section -->
     <section class="faq" id="faq">
         <h2 class="section-title">Frequently Asked Questions</h2>
         
@@ -870,16 +931,14 @@
         </div>
     </section>
     
-    <!-- Download Section -->
     <section id="download" style="text-align: center; padding: 80px 5%;">
         <h2 class="section-title">Ready to Experience Nexora?</h2>
         <p style="max-width: 700px; margin: 0 auto 40px; font-size: 1.2rem;">Join thousands of users who have already unlocked the full potential of Roblox with Nexora.</p>
-        <a href="#" class="download-btn" style="font-size: 1.2rem; padding: 15px 40px;">
-            <i class="fas fa-download"></i> Download Nexora v3.2.1
+        <a href="https://link-center.net/1232989/mWvpOvXLVRn2" class="download-btn" style="font-size: 1.2rem; padding: 15px 40px;">
+            <i class="fas fa-download"></i> Download Nexora v2.0.0
         </a>
     </section>
     
-    <!-- Footer -->
     <footer>
         <a href="#" class="footer-logo">Nex<span>ora</span></a>
         
@@ -903,7 +962,6 @@
     </footer>
     
     <script>
-        // Create animated particles
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             const particleCount = 30;
@@ -912,20 +970,16 @@
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 
-                // Random size between 2px and 6px
                 const size = Math.random() * 4 + 2;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 
-                // Random position
                 particle.style.left = `${Math.random() * 100}%`;
                 particle.style.top = `${Math.random() * 100}%`;
                 
-                // Random animation duration
                 const duration = Math.random() * 10 + 10;
                 particle.style.animationDuration = `${duration}s`;
                 
-                // Random delay
                 const delay = Math.random() * 5;
                 particle.style.animationDelay = `${delay}s`;
                 
@@ -933,7 +987,6 @@
             }
         }
         
-        // Animate steps on scroll
         function animateSteps() {
             const steps = document.querySelectorAll('.step');
             const windowHeight = window.innerHeight;
@@ -950,7 +1003,6 @@
             });
         }
         
-        // FAQ accordion
         function setupFAQ() {
             const faqItems = document.querySelectorAll('.faq-item');
             
@@ -958,20 +1010,17 @@
                 const question = item.querySelector('.faq-question');
                 
                 question.addEventListener('click', () => {
-                    // Close all other items
                     faqItems.forEach(otherItem => {
                         if (otherItem !== item && otherItem.classList.contains('active')) {
                             otherItem.classList.remove('active');
                         }
                     });
                     
-                    // Toggle current item
                     item.classList.toggle('active');
                 });
             });
         }
         
-        // Scroll reveal animation
         function setupScrollReveal() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -986,16 +1035,13 @@
             });
         }
         
-        // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();
             setupFAQ();
             setupScrollReveal();
             
-            // Initial step animation
             animateSteps();
             
-            // Animate steps on scroll
             window.addEventListener('scroll', animateSteps);
         });
     </script>
