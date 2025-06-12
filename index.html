@@ -671,6 +671,136 @@
                 transform: translate(100px, -50px);
             }
         }
+
+        /* Download Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .download-modal {
+            background: linear-gradient(135deg, rgba(30, 30, 60, 0.9), rgba(20, 20, 40, 0.95));
+            border-radius: 15px;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            border: 1px solid rgba(123, 45, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(123, 45, 255, 0.3);
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-overlay.active .download-modal {
+            transform: translateY(0);
+        }
+
+        .download-modal h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            color: var(--text-light);
+            background: linear-gradient(to right, var(--text-light), var(--violet-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .download-options {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .download-option {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-radius: 10px;
+            background: rgba(40, 40, 80, 0.5);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(123, 45, 255, 0.2);
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .download-option:hover {
+            background: rgba(50, 50, 100, 0.7);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--violet-glow);
+            border-color: var(--violet);
+        }
+
+        .download-option i {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            color: var(--violet);
+        }
+
+        .option-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--text-light);
+        }
+
+        .option-content p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--violet);
+            transform: rotate(90deg);
+        }
+
+        .modal-glow {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--violet-glow), transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .modal-glow-1 {
+            top: -50px;
+            right: -50px;
+        }
+
+        .modal-glow-2 {
+            bottom: -50px;
+            left: -50px;
+        }
     </style>
 </head>
 <body>
@@ -681,6 +811,34 @@
     </div>
     
     <div class="particles" id="particles"></div>
+    
+    <!-- Download Modal -->
+    <div class="modal-overlay" id="downloadModal">
+        <div class="download-modal">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <div class="modal-glow modal-glow-1"></div>
+            <div class="modal-glow modal-glow-2"></div>
+            
+            <h2>Choose Download Method</h2>
+            <div class="download-options">
+                <a href="https://link-center.net/1232989/mWvpOvXLVRn2" class="download-option" target="_blank">
+                    <i class="fas fa-link"></i>
+                    <div class="option-content">
+                        <h3>Linkvertise</h3>
+                        <p>Complete a quick offer to download</p>
+                    </div>
+                </a>
+                
+                <a href="https://work.ink/1YnT/nexorapc" class="download-option" target="_blank">
+                    <i class="fas fa-bolt"></i>
+                    <div class="option-content">
+                        <h3>Work Ink</h3>
+                        <p>Direct download with no offers</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
     
     <header>
         <a href="#" class="logo">
@@ -697,7 +855,7 @@
             </ul>
         </nav>
         
-        <a href="https://work.ink/1YnT/nexorapc" class="download-btn">
+        <a href="#" class="download-btn" id="downloadBtn">
             Download Now
         </a>
     </header>
@@ -708,7 +866,7 @@
             <p>The most advanced and reliable Roblox executor with cutting-edge features, unmatched performance, and a sleek dark-violet interface that stands out from the crowd.</p>
             
             <div class="hero-btns">
-                <a href="https://work.ink/1YnT/nexorapc" class="download-btn">
+                <a href="#" class="download-btn" id="heroDownloadBtn">
                     <i class="fas fa-download"></i> Download Now
                 </a>
                 <a href="#features" class="secondary-btn">
@@ -934,7 +1092,7 @@
     <section id="download" style="text-align: center; padding: 80px 5%;">
         <h2 class="section-title">Ready to Experience Nexora?</h2>
         <p style="max-width: 700px; margin: 0 auto 40px; font-size: 1.2rem;">Join thousands of users who have already unlocked the full potential of Roblox with Nexora.</p>
-        <a href="https://work.ink/1YnT/nexorapc" class="download-btn" style="font-size: 1.2rem; padding: 15px 40px;">
+        <a href="#" class="download-btn" id="bottomDownloadBtn" style="font-size: 1.2rem; padding: 15px 40px;">
             <i class="fas fa-download"></i> Download Nexora v2.0.0
         </a>
     </section>
@@ -1035,10 +1193,45 @@
             });
         }
         
+        // Download Modal Functionality
+        function setupDownloadModal() {
+            const modal = document.getElementById('downloadModal');
+            const closeBtn = document.getElementById('closeModal');
+            const downloadBtns = [
+                document.getElementById('downloadBtn'),
+                document.getElementById('heroDownloadBtn'),
+                document.getElementById('bottomDownloadBtn')
+            ];
+            
+            // Open modal when any download button is clicked
+            downloadBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close modal when X is clicked
+            closeBtn.addEventListener('click', () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+        
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();
             setupFAQ();
             setupScrollReveal();
+            setupDownloadModal();
             
             animateSteps();
             
