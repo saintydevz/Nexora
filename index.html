@@ -33,6 +33,8 @@
                 radial-gradient(circle at 20% 30%, var(--violet-glow) 0%, transparent 25%),
                 radial-gradient(circle at 80% 70%, var(--violet-glow) 0%, transparent 25%),
                 linear-gradient(to bottom, var(--darker), var(--dark));
+            position: relative;
+            z-index: 0;
         }
         
         .particles {
@@ -101,6 +103,12 @@
             color: var(--violet);
         }
         
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
         nav ul {
             display: flex;
             gap: 30px;
@@ -153,39 +161,36 @@
         }
         
         .tab-container {
-            padding: 0px 0%;
-            margin-top: 0px;
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            background: rgba(10, 10, 26, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(123, 45, 255, 0.2);
+            gap: 15px;
         }
         
         .tab {
-            padding: 10px 20px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            padding: 8px 15px;
+            font-size: 1rem;
+            font-weight: 500;
             color: var(--text);
             cursor: pointer;
-            border-radius: 10px;
+            border-radius: 50px;
             transition: all 0.3s ease;
-            position: relative;
+            border: 1px solid rgba(123, 45, 255, 0.2);
         }
         
         .tab:hover {
             color: var(--violet);
+            border-color: var(--violet);
         }
         
         .tab.active {
             background: var(--violet);
             color: white;
             box-shadow: 0 5px 15px var(--violet-glow);
+            border-color: var(--violet);
         }
         
         .tab-content {
             display: none;
+            z-index: 1;
         }
         
         .tab-content.active {
@@ -193,12 +198,13 @@
         }
         
         .hero {
-            padding: 100px 5%;
+            padding: 100px 5% 100px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             min-height: 100vh;
             position: relative;
+            z-index: 1;
         }
         
         .hero-content {
@@ -307,6 +313,7 @@
         
         section {
             padding: 100px 5%;
+            z-index: 1;
         }
         
         .section-title {
@@ -561,6 +568,7 @@
             padding: 50px 5% 20px;
             text-align: center;
             border-top: 1px solid rgba(123, 45, 255, 0.2);
+            z-index: 1;
         }
         
         .footer-logo {
@@ -638,7 +646,7 @@
         }
         
         @media (max-width: 768px) {
-            nav ul {
+            nav ul, .tab-container {
                 display: none;
             }
             
@@ -926,25 +934,27 @@
             <span>Nexora</span>
         </a>
         
-        <nav>
-            <ul>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#ratings">Ratings</a></li>
-                <li><a href="#how-to-use">How to Use</a></li>
-                <li><a href="#faq">FAQ</a></li>
-            </ul>
-        </nav>
-        
-        <a href="#" class="download-btn" id="downloadBtn">
-            Download Now
-        </a>
+        <div class="header-content">
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#ratings">Ratings</a></li>
+                    <li><a href="#how-to-use">How to Use</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            
+            <div class="tab-container">
+                <div class="tab active" data-tab="windows">Windows</div>
+                <div class="tab" data-tab="android">Android</div>
+                <div class="tab" data-tab="serverSide">Server-Side</div>
+            </div>
+            
+            <a href="#" class="download-btn" id="downloadBtn" data-platform="windows">
+                Download Now
+            </a>
+        </div>
     </header>
-    
-    <div class="tab-container">
-        <div class="tab active" data-tab="windows">Windows</div>
-        <div class="tab" data-tab="android">Android</div>
-        <div class="tab" data-tab="serverSide">Server-Side</div>
-    </div>
     
     <div class="tab-content active" id="windows">
         <section class="hero">
@@ -953,7 +963,7 @@
                 <p>The most advanced and reliable Roblox executor for Windows with cutting-edge features, unmatched performance, and a sleek dark-violet interface that stands out from the crowd.</p>
                 
                 <div class="hero-btns">
-                    <a href="#" class="download-btn" id="heroDownloadBtnWindows">
+                    <a href="#" class="download-btn" id="heroDownloadBtnWindows" data-platform="windows">
                         <i class="fas fa-download"></i> Download Now
                     </a>
                     <a href="#features" class="secondary-btn">
@@ -1184,7 +1194,7 @@
                 <p>Experience the ultimate Roblox executor on Android with optimized performance, mobile-friendly interface, and powerful scripting capabilities.</p>
                 
                 <div class="hero-btns">
-                    <a href="#" class="download-btn" id="heroDownloadBtnAndroid">
+                    <a href="#" class="download-btn" id="heroDownloadBtnAndroid" data-platform="android">
                         <i class="fas fa-download"></i> Download Now
                     </a>
                     <a href="#features" class="secondary-btn">
@@ -1415,7 +1425,7 @@
                 <p>Execute powerful server-side scripts with Nexora, featuring automatic backdoor scanning and full support for require scripts.</p>
                 
                 <div class="hero-btns">
-                    <a href="#" class="download-btn" id="heroDownloadBtnServerSide">
+                    <a href="#" class="download-btn" id="heroDownloadBtnServerSide" data-platform="serverSide">
                         <i class="fas fa-download"></i> Download Now
                     </a>
                     <a href="#features" class="secondary-btn">
@@ -1626,7 +1636,7 @@
     <section id="download" style="text-align: center; padding: 80px 5%;">
         <h2 class="section-title">Ready to Experience Nexora?</h2>
         <p style="max-width: 700px; margin: 0 auto 40px; font-size: 1.2rem;">Join thousands of users who have unlocked the full potential of Roblox with Nexora's powerful execution capabilities.</p>
-        <a href="#" class="download-btn" id="bottomDownloadBtn" style="font-size: 1.2rem; padding: 15px 40px;">
+        <a href="#" class="download-btn" id="bottomDownloadBtn" data-platform="windows" style="font-size: 1.2rem; padding: 15px 40px;">
             <i class="fas fa-download"></i> Download Nexora v2.0.0
         </a>
     </section>
@@ -1655,163 +1665,220 @@
     
     <script>
         function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
+            try {
+                const particlesContainer = document.getElementById('particles');
+                if (!particlesContainer) return;
                 
-                const size = Math.random() * 4 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                
-                const duration = Math.random() * 10 + 10;
-                particle.style.animationDuration = `${duration}s`;
-                
-                const delay = Math.random() * 5;
-                particle.style.animationDelay = `${delay}s`;
-                
-                particlesContainer.appendChild(particle);
+                const particleCount = 30;
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    const size = Math.random() * 4 + 2;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    
+                    const duration = Math.random() * 10 + 10;
+                    particle.style.animationDuration = `${duration}s`;
+                    
+                    const delay = Math.random() * 5;
+                    particle.style.animationDelay = `${delay}s`;
+                    
+                    particlesContainer.appendChild(particle);
+                }
+            } catch (error) {
+                console.error('Error creating particles:', error);
             }
         }
         
         function animateSteps() {
-            const steps = document.querySelectorAll('.step');
-            const windowHeight = window.innerHeight;
-            
-            steps.forEach((step, index) => {
-                const stepPosition = step.getBoundingClientRect().top;
-                const stepDelay = index * 100;
+            try {
+                const steps = document.querySelectorAll('.step');
+                const windowHeight = window.innerHeight;
                 
-                if (stepPosition < windowHeight - 100) {
-                    setTimeout(() => {
-                        step.classList.add('visible');
-                    }, stepDelay);
-                }
-            });
+                steps.forEach((step, index) => {
+                    const stepPosition = step.getBoundingClientRect().top;
+                    const stepDelay = index * 100;
+                    
+                    if (stepPosition < windowHeight - 100) {
+                        setTimeout(() => {
+                            step.classList.add('visible');
+                        }, stepDelay);
+                    }
+                });
+            } catch (error) {
+                console.error('Error animating steps:', error);
+            }
         }
         
         function setupFAQ() {
-            const faqItems = document.querySelectorAll('.faq-item');
-            
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
+            try {
+                const faqItems = document.querySelectorAll('.faq-item');
                 
-                question.addEventListener('click', () => {
-                    faqItems.forEach(otherItem => {
-                        if (otherItem !== item && otherItem.classList.contains('active')) {
-                            otherItem.classList.remove('active');
-                        }
-                    });
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question');
+                    if (!question) return;
                     
-                    item.classList.toggle('active');
+                    question.addEventListener('click', () => {
+                        faqItems.forEach(otherItem => {
+                            if (otherItem !== item && otherItem.classList.contains('active')) {
+                                otherItem.classList.remove('active');
+                            }
+                        });
+                        
+                        item.classList.toggle('active');
+                    });
                 });
-            });
+            } catch (error) {
+                console.error('Error setting up FAQ:', error);
+            }
         }
         
         function setupScrollReveal() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
+            try {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                document.querySelectorAll('.step').forEach(step => {
+                    observer.observe(step);
                 });
-            }, { threshold: 0.1 });
-            
-            document.querySelectorAll('.step').forEach(step => {
-                observer.observe(step);
-            });
+            } catch (error) {
+                console.error('Error setting up scroll reveal:', error);
+            }
         }
         
         function setupDownloadModal() {
-            const modal = document.getElementById('downloadModal');
-            const closeBtn = document.getElementById('closeModal');
-            const downloadOptions = {
-                windows: document.getElementById('windowsDownloads'),
-                android: document.getElementById('androidDownloads'),
-                serverSide: document.getElementById('serverSideDownloads')
-            };
-            
-            let currentPlatform = 'windows';
-            
-            function showDownloadOptions(platform) {
-                Object.values(downloadOptions).forEach(option => option.classList.remove('active'));
-                downloadOptions[platform].classList.add('active');
-                currentPlatform = platform;
-            }
-            
-            const downloadBtns = [
-                { btn: document.getElementById('downloadBtn'), platform: 'windows' },
-                { btn: document.getElementById('heroDownloadBtnWindows'), platform: 'windows' },
-                { btn: document.getElementById('heroDownloadBtnAndroid'), platform: 'android' },
-                { btn: document.getElementById('heroDownloadBtnServerSide'), platform: 'serverSide' },
-                { btn: document.getElementById('bottomDownloadBtn'), platform: 'windows' }
-            ];
-            
-            downloadBtns.forEach(({ btn, platform }) => {
-                if (btn) {
-                    btn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        showDownloadOptions(platform);
-                        modal.classList.add('active');
-                        document.body.style.overflow = 'hidden';
+            try {
+                const modal = document.getElementById('downloadModal');
+                const closeBtn = document.getElementById('closeModal');
+                if (!modal || !closeBtn) return;
+                
+                const downloadOptions = {
+                    windows: document.getElementById('windowsDownloads'),
+                    android: document.getElementById('androidDownloads'),
+                    serverSide: document.getElementById('serverSideDownloads')
+                };
+                
+                let currentPlatform = 'windows';
+                
+                function showDownloadOptions(platform) {
+                    Object.values(downloadOptions).forEach(option => {
+                        if (option) option.classList.remove('active');
                     });
+                    if (downloadOptions[platform]) {
+                        downloadOptions[platform].classList.add('active');
+                        currentPlatform = platform;
+                    }
                 }
-            });
-            
-            closeBtn.addEventListener('click', () => {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-            
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
+                
+                const downloadBtns = [
+                    { btn: document.getElementById('downloadBtn'), platform: 'windows' },
+                    { btn: document.getElementById('heroDownloadBtnWindows'), platform: 'windows' },
+                    { btn: document.getElementById('heroDownloadBtnAndroid'), platform: 'android' },
+                    { btn: document.getElementById('heroDownloadBtnServerSide'), platform: 'serverSide' },
+                    { btn: document.getElementById('bottomDownloadBtn'), platform: 'windows' }
+                ];
+                
+                downloadBtns.forEach(({ btn, platform }) => {
+                    if (btn) {
+                        btn.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            showDownloadOptions(platform || btn.getAttribute('data-platform'));
+                            modal.classList.add('active');
+                            document.body.style.overflow = 'hidden';
+                        });
+                    }
+                });
+                
+                closeBtn.addEventListener('click', () => {
                     modal.classList.remove('active');
                     document.body.style.overflow = '';
-                }
-            });
+                });
+                
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } catch (error) {
+                console.error('Error setting up download modal:', error);
+            }
         }
         
         function setupTabs() {
-            const tabs = document.querySelectorAll('.tab');
-            const tabContents = document.querySelectorAll('.tab-content');
-            
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const tabId = tab.getAttribute('data-tab');
-                    
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tabContents.forEach(content => content.classList.remove('active'));
-                    
-                    tab.classList.add('active');
-                    document.getElementById(tabId).classList.add('active');
-                    
-                    // Re-run animations for the new content
-                    animateSteps();
-                    setupFAQ();
-                    setupScrollReveal();
-                    
-                    // Update download button platform
-                    const bottomDownloadBtn = document.getElementById('bottomDownloadBtn');
-                    bottomDownloadBtn.setAttribute('data-platform', tabId);
+            try {
+                const tabs = document.querySelectorAll('.tab');
+                const tabContents = document.querySelectorAll('.tab-content');
+                const bottomDownloadBtn = document.getElementById('bottomDownloadBtn');
+                if (!tabs.length || !tabContents.length || !bottomDownloadBtn) return;
+                
+                // Ensure Windows tab is active by default
+                tabs.forEach(tab => tab.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                const windowsTab = document.querySelector('.tab[data-tab="windows"]');
+                const windowsContent = document.getElementById('windows');
+                if (windowsTab && windowsContent) {
+                    windowsTab.classList.add('active');
+                    windowsContent.classList.add('active');
+                }
+                
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        const tabId = tab.getAttribute('data-tab');
+                        
+                        tabs.forEach(t => t.classList.remove('active'));
+                        tabContents.forEach(content => content.classList.remove('active'));
+                        
+                        tab.classList.add('active');
+                        const content = document.getElementById(tabId);
+                        if (content) content.classList.add('active');
+                        
+                        // Update download button platform
+                        bottomDownloadBtn.setAttribute('data-platform', tabId);
+                        
+                        // Re-run animations for the new content
+                        animateSteps();
+                        setupFAQ();
+                        setupScrollReveal();
+                    });
                 });
-            });
+            } catch (error) {
+                console.error('Error setting up tabs:', error);
+            }
         }
         
         document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
-            setupFAQ();
-            setupScrollReveal();
-            setupDownloadModal();
-            setupTabs();
-            
-            animateSteps();
-            
-            window.addEventListener('scroll', animateSteps);
+            try {
+                // Initialize default tab state
+                const windowsTab = document.querySelector('.tab[data-tab="windows"]');
+                const windowsContent = document.getElementById('windows');
+                if (windowsTab && windowsContent) {
+                    windowsTab.classList.add('active');
+                    windowsContent.classList.add('active');
+                }
+                
+                createParticles();
+                setupFAQ();
+                setupScrollReveal();
+                setupDownloadModal();
+                setupTabs();
+                
+                animateSteps();
+                
+                window.addEventListener('scroll', animateSteps);
+            } catch (error) {
+                console.error('Error in DOMContentLoaded:', error);
+            }
         });
     </script>
 </body>
