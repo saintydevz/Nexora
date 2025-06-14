@@ -162,30 +162,90 @@
         
         .tab-container {
             display: flex;
-            gap: 15px;
+            gap: 10px;
+            position: relative;
         }
         
         .tab {
-            padding: 8px 15px;
+            padding: 10px 20px;
             font-size: 1rem;
-            font-weight: 500;
+            font-weight: 600;
             color: var(--text);
             cursor: pointer;
-            border-radius: 50px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, rgba(20, 20, 40, 0.8), rgba(30, 30, 60, 0.8));
+            border: 2px solid transparent;
             transition: all 0.3s ease;
-            border: 1px solid rgba(123, 45, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            transform: skew(-5deg);
+            box-shadow: 0 0 10px var(--violet-glow);
+        }
+        
+        .tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+            z-index: 0;
+        }
+        
+        .tab:hover::before {
+            left: 100%;
         }
         
         .tab:hover {
-            color: var(--violet);
+            color: var(--violet-light);
             border-color: var(--violet);
+            transform: skew(-5deg) scale(1.1) translateY(-3px);
+            box-shadow: 0 0 20px var(--violet-glow);
         }
         
         .tab.active {
-            background: var(--violet);
+            background: linear-gradient(45deg, var(--violet), var(--violet-light));
             color: white;
-            box-shadow: 0 5px 15px var(--violet-glow);
-            border-color: var(--violet);
+            border-color: var(--violet-light);
+            box-shadow: 0 0 25px var(--violet-glow);
+            animation: pulseTab 2s infinite ease-in-out;
+        }
+        
+        @keyframes pulseTab {
+            0%, 100% {
+                box-shadow: 0 0 25px var(--violet-glow);
+            }
+            50% {
+                box-shadow: 0 0 35px var(--violet-glow);
+            }
+        }
+        
+        .tab span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tab-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--violet-light);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: tabParticle 1s ease-out forwards;
+        }
+        
+        @keyframes tabParticle {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(calc(var(--dx) * 50px), calc(var(--dy) * 50px)) scale(0.5);
+            }
         }
         
         .tab-content {
@@ -945,9 +1005,9 @@
             </nav>
             
             <div class="tab-container">
-                <div class="tab active" data-tab="windows">Windows</div>
-                <div class="tab" data-tab="android">Android</div>
-                <div class="tab" data-tab="serverSide">Server-Side</div>
+                <div class="tab active" data-tab="windows"><span>Windows</span></div>
+                <div class="tab" data-tab="android"><span>Android</span></div>
+                <div class="tab" data-tab="serverSide"><span>Server-Side</span></div>
             </div>
             
             <a href="#" class="download-btn" id="downloadBtn" data-platform="windows">
@@ -1694,6 +1754,34 @@
             }
         }
         
+        function createTabParticles(tab) {
+            try {
+                const rect = tab.getBoundingClientRect();
+                const tabCenterX = rect.left + rect.width / 2;
+                const tabCenterY = rect.top + rect.height / 2;
+                
+                for (let i = 0; i < 8; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('tab-particle');
+                    
+                    const angle = Math.random() * 2 * Math.PI;
+                    const dx = Math.cos(angle);
+                    const dy = Math.sin(angle);
+                    
+                    particle.style.left = `${tabCenterX}px`;
+                    particle.style.top = `${tabCenterY}px`;
+                    particle.style.setProperty('--dx', dx);
+                    particle.style.setProperty('--dy', dy);
+                    
+                    document.body.appendChild(particle);
+                    
+                    setTimeout(() => particle.remove(), 1000);
+                }
+            } catch (error) {
+                console.error('Error creating tab particles:', error);
+            }
+        }
+        
         function animateSteps() {
             try {
                 const steps = document.querySelectorAll('.step');
@@ -1842,6 +1930,9 @@
                         tab.classList.add('active');
                         const content = document.getElementById(tabId);
                         if (content) content.classList.add('active');
+                        
+                        // Create tab particles
+                        createTabParticles(tab);
                         
                         // Update download button platform
                         bottomDownloadBtn.setAttribute('data-platform', tabId);
