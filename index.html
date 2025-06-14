@@ -152,8 +152,48 @@
             box-shadow: 0 8px 25px var(--violet-glow);
         }
         
+        .tab-container {
+            padding: 20px 5%;
+            margin-top: 80px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background: rgba(10, 10, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(123, 45, 255, 0.2);
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .tab:hover {
+            color: var(--violet);
+        }
+        
+        .tab.active {
+            background: var(--violet);
+            color: white;
+            box-shadow: 0 5px 15px var(--violet-glow);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
         .hero {
-            padding: 180px 5% 100px;
+            padding: 100px 5%;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -724,9 +764,13 @@
         }
 
         .download-options {
-            display: flex;
+            display: none;
             flex-direction: column;
             gap: 20px;
+        }
+
+        .download-options.active {
+            display: flex;
         }
 
         .download-option {
@@ -820,23 +864,43 @@
             <div class="modal-glow modal-glow-2"></div>
             
             <h2>Choose Download Method</h2>
-            <div class="download-options">
+            <div class="download-options" id="windowsDownloads">
                 <a href="https://link-center.net/1232989/mWvpOvXLVRn2" class="download-option" target="_blank">
                     <i class="fas fa-link"></i>
                     <div class="option-content">
-                        <h3>Linkvertise - Executor</h3>
-                        <p>Complete a quick offer to download Nexora Executor</p>
+                        <h3>Linkvertise - Windows Executor</h3>
+                        <p>Complete a quick offer to download Nexora Executor for Windows</p>
                     </div>
                 </a>
                 
                 <a href="https://work.ink/1YnT/nexorapc" class="download-option" target="_blank">
                     <i class="fas fa-bolt"></i>
                     <div class="option-content">
-                        <h3>Work Ink - Executor</h3>
-                        <p>Direct download for Nexora Executor with no offers</p>
+                        <h3>Work Ink - Windows Executor</h3>
+                        <p>Direct download for Nexora Executor for Windows with no offers</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="download-options" id="androidDownloads">
+                <a href="https://link-center.net/1232989/android-executor" class="download-option" target="_blank">
+                    <i class="fas fa-link"></i>
+                    <div class="option-content">
+                        <h3>Linkvertise - Android Executor</h3>
+                        <p>Complete a quick offer to download Nexora Executor for Android</p>
                     </div>
                 </a>
                 
+                <a href="https://work.ink/1YnT/nexora-android" class="download-option" target="_blank">
+                    <i class="fas fa-bolt"></i>
+                    <div class="option-content">
+                        <h3>Work Ink - Android Executor</h3>
+                        <p>Direct download for Nexora Executor for Android with no offers</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="download-options" id="serverSideDownloads">
                 <a href="https://link-center.net/1232989/AuDxhc65fUjn" class="download-option" target="_blank">
                     <i class="fas fa-server"></i>
                     <div class="option-content">
@@ -876,256 +940,692 @@
         </a>
     </header>
     
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Unleash the Power of Roblox with Nexora</h1>
-            <p>The most advanced and reliable Roblox executor with cutting-edge features, unmatched performance, and a sleek dark-violet interface that stands out from the crowd. Now with powerful server-side script execution!</p>
-            
-            <div class="hero-btns">
-                <a href="#" class="download-btn" id="heroDownloadBtn">
-                    <i class="fas fa-download"></i> Download Now
-                </a>
-                <a href="#features" class="secondary-btn">
-                    <i class="fas fa-star"></i> Explore Features
-                </a>
-            </div>
-        </div>
-        
-        <div class="hero-image">
-            <img src="https://i.ibb.co/N2GzVzmx/Screenshot-2025-06-11-081801.png" alt="Nexora Executor Interface">
-            <div class="glow glow-1"></div>
-            <div class="glow glow-2"></div>
-        </div>
-    </section>
+    <div class="tab-container">
+        <div class="tab active" data-tab="windows">Windows</div>
+        <div class="tab" data-tab="android">Android</div>
+        <div class="tab" data-tab="serverSide">Server-Side</div>
+    </div>
     
-    <section id="features">
-        <h2 class="section-title">Powerful Features</h2>
+    <div class="tab-content active" id="windows">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Unleash the Power of Roblox with Nexora on Windows</h1>
+                <p>The most advanced and reliable Roblox executor for Windows with cutting-edge features, unmatched performance, and a sleek dark-violet interface that stands out from the crowd.</p>
+                
+                <div class="hero-btns">
+                    <a href="#" class="download-btn" id="heroDownloadBtnWindows">
+                        <i class="fas fa-download"></i> Download Now
+                    </a>
+                    <a href="#features" class="secondary-btn">
+                        <i class="fas fa-star"></i> Explore Features
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <img src="https://i.ibb.co/N2GzVzmx/Screenshot-2025-06-11-081801.png" alt="Nexora Executor Interface">
+                <div class="glow glow-1"></div>
+                <div class="glow glow-2"></div>
+            </div>
+        </section>
         
-        <div class="features">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-bolt"></i>
-                </div>
-                <h3>Lightning Fast Execution</h3>
-                <p>Experience unparalleled speed with our optimized execution engine that runs scripts faster than any other executor available.</p>
-            </div>
+        <section id="features">
+            <h2 class="section-title">Powerful Features</h2>
             
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h3>Undetectable</h3>
-                <p>Our advanced anti-ban system ensures you stay under the radar while enjoying all the benefits of scripting.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-code"></i>
-                </div>
-                <h3>Lua 5.1 Support</h3>
-                <p>Full support for Lua 5.1 with all standard libraries and additional Roblox-specific functions.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-server"></i>
-                </div>
-                <h3>Server-Side Execution</h3>
-                <p>Execute server-side scripts with full support for require scripts. Automatically scans for game backdoors - if none are found, no backdoors exist.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-plug"></i>
-                </div>
-                <h3>Plugin System</h3>
-                <p>Extend functionality with our plugin system that allows community-created addons and scripts.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-palette"></i>
-                </div>
-                <h3>Custom UI</h3>
-                <p>Fully customizable interface with dark and violet themes, adjustable layouts, and personal preferences.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-sync-alt"></i>
-                </div>
-                <h3>Auto Updates</h3>
-                <p>Never worry about outdated versions - Nexora automatically updates to the latest stable release.</p>
-            </div>
-        </div>
-        
-        <div class="ratings" id="ratings">
-            <h2 class="section-title">User Ratings</h2>
-            
-            <div class="rating-cards">
-                <div class="rating-card">
-                    <div class="rating-header">
-                        <img src="https://i.imgur.com/JqYeYnN.jpg" alt="User" class="rating-avatar">
-                        <div class="rating-name">ScriptMaster99</div>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
                     </div>
-                    <div class="rating-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="rating-text">"Nexora is by far the best executor I've used. The speed is incredible and it never gets detected. The dark violet theme is also super sleek!"</p>
+                    <h3>Lightning Fast Execution</h3>
+                    <p>Experience unparalleled speed with our optimized execution engine that runs scripts faster than any other Windows executor.</p>
                 </div>
                 
-                <div class="rating-card">
-                    <div class="rating-header">
-                        <img src="https://i.imgur.com/pXWxJ3F.jpg" alt="User" class="rating-avatar">
-                        <div class="rating-name">RobloxPro123</div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
                     </div>
-                    <div class="rating-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="rating-text">"I've tried them all, but Nexora stands out with its amazing features and stability. The plugin system is a game-changer!"</p>
+                    <h3>Undetectable</h3>
+                    <p>Our advanced anti-ban system ensures you stay under the radar while enjoying all the benefits of scripting on Windows.</p>
                 </div>
                 
-                <div class="rating-card">
-                    <div class="rating-header">
-                        <img src="https://i.imgur.com/Qt5vWbB.jpg" alt="User" class="rating-avatar">
-                        <div class="rating-name">ExploitQueen</div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
                     </div>
-                    <div class="rating-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
+                    <h3>Lua 5.1 Support</h3>
+                    <p>Full support for Lua 5.1 with all standard libraries and additional Roblox-specific functions.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-plug"></i>
                     </div>
-                    <p class="rating-text">"Almost perfect! The server-side execution is incredible and the backdoor scanner works flawlessly. Highly recommend!"</p>
+                    <h3>Plugin System</h3>
+                    <p>Extend functionality with our plugin system that allows community-created addons and scripts.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Custom UI</h3>
+                    <p>Fully customizable interface with dark and violet themes, adjustable layouts, and personal preferences.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Auto Updates</h3>
+                    <p>Never worry about outdated versions - Nexora automatically updates to the latest stable release.</p>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <section class="how-to-use" id="how-to-use">
-        <h2 class="section-title">How To Use</h2>
+            
+            <div class="ratings" id="ratings">
+                <h2 class="section-title">User Ratings</h2>
+                
+                <div class="rating-cards">
+                    <div class="rating-card">
+                        <div class="rating-header">
+                            <img src="https://i.imgur.com/JqYeYnN.jpg" alt="User" class="rating-avatar">
+                            <div class="rating-name">ScriptMaster99</div>
+                        </div>
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="rating-text">"Nexora is by far the best Windows executor I've used. The speed is incredible and it never gets detected!"</p>
+                    </div>
+                    
+                    <div class="rating-card">
+                        <div class="rating-header">
+                            <img src="https://i.imgur.com/pXWxJ3F.jpg" alt="User" class="rating-avatar">
+                            <div class="rating-name">RobloxPro123</div>
+                        </div>
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="rating-text">"I've tried them all, but Nexora on Windows stands out with its amazing features and stability."</p>
+                    </div>
+                    
+                    <div class="rating-card">
+                        <div class="rating-header">
+                            <img src="https://i.imgur.com/Qt5vWbB.jpg" alt="User" class="rating-avatar">
+                            <div class="rating-name">ExploitQueen</div>
+                        </div>
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="rating-text">"Almost perfect! The Windows version is incredible and highly reliable."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
         
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Download Nexora</h3>
-                    <p>Click the download button above to get the latest version of Nexora and server-side scripts. The download will start automatically.</p>
-                </div>
-            </div>
+        <section class="how-to-use" id="how-to-use">
+            <h2 class="section-title">How To Use</h2>
             
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>Extract Files</h3>
-                    <p>After downloading, extract the zip file to a folder of your choice using WinRAR or 7-Zip.</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Download Nexora</h3>
+                        <p>Click the download button to get the latest version of Nexora for Windows. The download will start automatically.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Extract Files</h3>
+                        <p>After downloading, extract the zip file to a folder of your choice using WinRAR or 7-Zip.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Run Nexora</h3>
+                        <p>Open the extracted folder and run Nexora.exe as administrator for best performance.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Launch Roblox</h3>
+                        <p>Start your Roblox game and wait for it to fully load before proceeding to the next step.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Attach & Execute</h3>
+                        <p>In Nexora, click the "Attach" button, then paste your script. Click "Execute" to run your script in-game.</p>
+                    </div>
                 </div>
             </div>
-            
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>Run Nexora</h3>
-                    <p>Open the extracted folder and run Nexora.exe as administrator for best performance.</p>
-                </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h3>Launch Roblox</h3>
-                    <p>Start your Roblox game and wait for it to fully load before proceeding to the next step.</p>
-                </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">5</div>
-                <div class="step-content">
-                    <h3>Attach & Execute</h3>
-                    <p>In Nexora, click the "Attach" button, then paste your script or use the server-side scanner to detect backdoors. If no backdoors are found, the game is secure. Click "Execute" to run your script in-game.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="faq" id="faq">
-        <h2 class="section-title">Frequently Asked Questions</h2>
+        </section>
         
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Is Nexora safe to use?</span>
-                    <i class="fas fa-chevron-down"></i>
+        <section class="faq" id="faq">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is Nexora safe to use on Windows?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, Nexora has advanced anti-detection systems that make it extremely safe to use on Windows. However, there's always a small risk when exploiting in Roblox.</p>
+                    </div>
                 </div>
-                <div class="faq-answer">
-                    <p>Yes, Nexora has advanced anti-detection systems that make it extremely safe to use. However, as with any executor, there's always a small risk when exploiting in Roblox.</p>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Does Nexora work on Mac?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Currently, Nexora is only available for Windows. We're working on a Mac version that will be released in the future.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is there a key system?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nexora is completely free to use with no key system or paid versions. All features are available to everyone.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How often is Nexora updated?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We release updates every 1-2 weeks to ensure compatibility with the latest Roblox updates and to add new features.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I get banned for using Nexora?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>While Nexora is designed to be undetectable, Roblox occasionally updates their anti-cheat systems. We recommend using alt accounts for exploiting.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div class="tab-content" id="android">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Unleash the Power of Roblox with Nexora on Android</h1>
+                <p>Experience the ultimate Roblox executor on Android with optimized performance, mobile-friendly interface, and powerful scripting capabilities.</p>
+                
+                <div class="hero-btns">
+                    <a href="#" class="download-btn" id="heroDownloadBtnAndroid">
+                        <i class="fas fa-download"></i> Download Now
+                    </a>
+                    <a href="#features" class="secondary-btn">
+                        <i class="fas fa-star"></i> Explore Features
+                    </a>
                 </div>
             </div>
             
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Does Nexora work on Mac?</span>
-                    <i class="fas fa-chevron-down"></i>
+            <div class="hero-image">
+                <img src="https://i.ibb.co/N2GzVzmx/Screenshot-2025-06-11-081801.png" alt="Nexora Executor Interface">
+                <div class="glow glow-1"></div>
+                <div class="glow glow-2"></div>
+            </div>
+        </section>
+        
+        <section id="features">
+            <h2 class="section-title">Powerful Features</h2>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Optimized</h3>
+                    <p>Designed specifically for Android, with touch-friendly controls and optimized performance for mobile devices.</p>
                 </div>
-                <div class="faq-answer">
-                    <p>Currently, Nexora is only available for Windows. We're working on a Mac version that will be released in the future.</p>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Fast Execution</h3>
+                    <p>Run scripts quickly and efficiently on Android with our streamlined execution engine.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Undetectable</h3>
+                    <p>Advanced anti-ban system tailored for Android to keep your scripting safe and secure.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Lua 5.1 Support</h3>
+                    <p>Full support for Lua 5.1 with Roblox-specific functions, optimized for mobile use.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Mobile UI</h3>
+                    <p>Customizable, touch-friendly interface with dark and violet themes for a seamless mobile experience.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Auto Updates</h3>
+                    <p>Automatic updates ensure you always have the latest version of Nexora for Android.</p>
                 </div>
             </div>
             
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Is there a key system?</span>
-                    <i class="fas fa-chevron-down"></i>
+            <div class="ratings" id="ratings">
+                <h2 class="section-title">User Ratings</h2>
+                
+                <div class="rating-cards">
+                    <div class="rating-card">
+                        <div class="rating-header">
+                            <img src="https://i.imgur.com/JqYeYnN.jpg" alt="User" class="rating-avatar">
+                            <div class="rating-name">MobileScriptor</div>
+                        </div>
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="rating-text">"Nexora on Android is a game-changer! The mobile interface is super smooth and easy to use."</p>
+                    </div>
+                    
+                    <div class="rating-card">
+                        <div class="rating-header">
+                            <img src="https://i.imgur.com/pXWxJ3F.jpg" alt="User" class="rating-avatar">
+                            <div class="rating-name">AndroidGamer</div>
+                        </div>
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="rating-text">"Finally, a reliable executor for Android! Nexora runs scripts perfectly."</p>
+                    </div>
+                    
+                    <div class="rating-card">
+                        <div class="rating-header">
+                            <img src="https://i.imgur.com/Qt5vWbB.jpg" alt="User" class="rating-avatar">
+                            <div class="rating-name">MobileExploit</div>
+                        </div>
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="rating-text">"Great app for Android users. The touch controls are intuitive and execution is fast."</p>
+                    </div>
                 </div>
-                <div class="faq-answer">
-                    <p>Nexora is completely free to use with no key system or paid versions. All features are available to everyone.</p>
+            </div>
+        </section>
+        
+        <section class="how-to-use" id="how-to-use">
+            <h2 class="section-title">How To Use</h2>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Download Nexora</h3>
+                        <p>Click the download button to get the latest version of Nexora for Android. The download will start automatically.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Install APK</h3>
+                        <p>After downloading, open the APK file and follow the prompts to install Nexora on your Android device.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Allow Permissions</h3>
+                        <p>Grant the necessary permissions for Nexora to run properly on your device.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Launch Roblox</h3>
+                        <p>Open the Roblox app and wait for the game to fully load before proceeding.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Attach & Execute</h3>
+                        <p>Open Nexora, tap "Attach" to connect to Roblox, then paste your script and tap "Execute" to run it.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="faq" id="faq">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is Nexora safe to use on Android?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, Nexora is designed to be safe on Android with anti-detection systems. However, use caution as with any executor.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Which Android versions are supported?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nexora supports Android 8.0 and above for optimal performance.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is there a key system?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nexora is completely free to use on Android with no key system or paid versions.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How often is Nexora updated?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We release updates every 1-2 weeks to ensure compatibility with Roblox and add new features.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I get banned for using Nexora?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>While designed to be undetectable, Roblox may update their anti-cheat. Use alt accounts for safety.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div class="tab-content" id="serverSide">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Unlock Server-Side Power with Nexora</h1>
+                <p>Execute powerful server-side scripts with Nexora, featuring automatic backdoor scanning and full support for require scripts.</p>
+                
+                <div class="hero-btns">
+                    <a href="#" class="download-btn" id="heroDownloadBtnServerSide">
+                        <i class="fas fa-download"></i> Download Now
+                    </a>
+                    <a href="#features" class="secondary-btn">
+                        <i class="fas fa-star"></i> Explore Features
+                    </a>
                 </div>
             </div>
             
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>How does server-side execution work?</span>
-                    <i class="fas fa-chevron-down"></i>
+            <div class="hero-image">
+                <img src="https://i.ibb.co/N2GzVzmx/Screenshot-2025-06-11-081801.png" alt="Nexora Executor Interface">
+                <div class="glow glow-1"></div>
+                <div class="glow glow-2"></div>
+            </div>
+        </section>
+        
+        <section id="features">
+            <h2 class="section-title">Powerful Features</h2>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Server-Side Execution</h3>
+                    <p>Execute server-side scripts with full support for require scripts and advanced functionality.</p>
                 </div>
-                <div class="faq-answer">
-                    <p>Nexora's server-side execution supports all require scripts and includes an automatic backdoor scanner. If no backdoors are detected, it means the game has no exploitable server-side vulnerabilities.</p>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Backdoor Scanner</h3>
+                    <p>Automatically scans for game backdoors. If none are found, the game is secure from server-side exploits.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Lua 5.1 Support</h3>
+                    <p>Full support for Lua 5.1 with server-side specific functions and libraries.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure Execution</h3>
+                    <p>Designed to minimize detection risks during server-side script execution.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Auto Updates</h3>
+                    <p>Automatic updates to ensure compatibility with the latest Roblox server updates.</p>
                 </div>
             </div>
             
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>How often is Nexora updated?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>We release updates every 1-2 weeks to ensure compatibility with the latest Roblox updates and to add new features.</p>
+            <div class="ratings" id="ratings">
+                <h2 class="section-title">User Ratings</h2>
+                
+                <div class="rating-cards">
+                    <div class="rating-card">
+                        <div class="rating-header">
+                            <img src="https://i.imgur.com/JqYeYnN.jpg" alt="User" class="rating-avatar">
+                            <div class="rating-name">ServerScriptor</div>
+                        </div>
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="rating-text">"The server-side execution is flawless. The backdoor scanner is a lifesaver!"</p>
+                    </div>
+                    
+                    <div class="rating-card">
+                        <div class="rating-header">
+                            <img src="https://i.imgur.com/pXWxJ3F.jpg" alt="User" class="rating-avatar">
+                            <div class="rating-name">BackdoorMaster</div>
+                        </div>
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="rating-text">"Nexora's server-side capabilities are unmatched. Highly reliable and powerful."</p>
+                    </div>
+                    
+                    <div class="rating-card">
+                        <div class="rating-header">
+                            <img src="https://i.imgur.com/Qt5vWbB.jpg" alt="User" class="rating-avatar">
+                            <div class="rating-name">ExploitDev</div>
+                        </div>
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="rating-text">"The backdoor scanner works perfectly, and server-side execution is top-notch."</p>
+                    </div>
                 </div>
             </div>
+        </section>
+        
+        <section class="how-to-use" id="how-to-use">
+            <h2 class="section-title">How To Use</h2>
             
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>Can I get banned for using Nexora?</span>
-                    <i class="fas fa-chevron-down"></i>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Download Server-Side Script</h3>
+                        <p>Click the download button to get the latest server-side script for Nexora.</p>
+                    </div>
                 </div>
-                <div class="faq-answer">
-                    <p>While Nexora is designed to be undetectable, Roblox occasionally updates their anti-cheat systems. We recommend using alt accounts for exploiting.</p>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Load Script</h3>
+                        <p>Load the server-side script into Nexora's script editor or compatible executor.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Scan for Backdoors</h3>
+                        <p>Use Nexora's built-in backdoor scanner to detect exploitable vulnerabilities in the game.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Execute Script</h3>
+                        <p>If backdoors are found, execute the server-side script to leverage the vulnerabilities.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        
+        <section class="faq" id="faq">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is server-side execution safe?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Server-side execution carries higher risks but Nexora's scanner ensures safe usage by detecting exploitable backdoors.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How does the backdoor scanner work?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The scanner automatically checks for server-side vulnerabilities. If none are found, the game is secure from server-side exploits.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is there a key system?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nexora's server-side scripts are free to use with no key system or paid versions.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How often are scripts updated?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Server-side scripts are updated every 1-2 weeks to maintain compatibility with Roblox updates.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I get banned for server-side scripting?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Server-side scripting is riskier. Always use alt accounts and ensure backdoors are detected before executing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
     
     <section id="download" style="text-align: center; padding: 80px 5%;">
         <h2 class="section-title">Ready to Experience Nexora?</h2>
-        <p style="max-width: 700px; margin: 0 auto 40px; font-size: 1.2rem;">Join thousands of users who have already unlocked the full potential of Roblox with Nexora's client-side and server-side execution capabilities.</p>
+        <p style="max-width: 700px; margin: 0 auto 40px; font-size: 1.2rem;">Join thousands of users who have unlocked the full potential of Roblox with Nexora's powerful execution capabilities.</p>
         <a href="#" class="download-btn" id="bottomDownloadBtn" style="font-size: 1.2rem; padding: 15px 40px;">
             <i class="fas fa-download"></i> Download Nexora v2.0.0
         </a>
@@ -1230,18 +1730,37 @@
         function setupDownloadModal() {
             const modal = document.getElementById('downloadModal');
             const closeBtn = document.getElementById('closeModal');
+            const downloadOptions = {
+                windows: document.getElementById('windowsDownloads'),
+                android: document.getElementById('androidDownloads'),
+                serverSide: document.getElementById('serverSideDownloads')
+            };
+            
+            let currentPlatform = 'windows';
+            
+            function showDownloadOptions(platform) {
+                Object.values(downloadOptions).forEach(option => option.classList.remove('active'));
+                downloadOptions[platform].classList.add('active');
+                currentPlatform = platform;
+            }
+            
             const downloadBtns = [
-                document.getElementById('downloadBtn'),
-                document.getElementById('heroDownloadBtn'),
-                document.getElementById('bottomDownloadBtn')
+                { btn: document.getElementById('downloadBtn'), platform: 'windows' },
+                { btn: document.getElementById('heroDownloadBtnWindows'), platform: 'windows' },
+                { btn: document.getElementById('heroDownloadBtnAndroid'), platform: 'android' },
+                { btn: document.getElementById('heroDownloadBtnServerSide'), platform: 'serverSide' },
+                { btn: document.getElementById('bottomDownloadBtn'), platform: 'windows' }
             ];
             
-            downloadBtns.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    modal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
+            downloadBtns.forEach(({ btn, platform }) => {
+                if (btn) {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        showDownloadOptions(platform);
+                        modal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    });
+                }
             });
             
             closeBtn.addEventListener('click', () => {
@@ -1257,11 +1776,38 @@
             });
         }
         
+        function setupTabs() {
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    tab.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                    
+                    // Re-run animations for the new content
+                    animateSteps();
+                    setupFAQ();
+                    setupScrollReveal();
+                    
+                    // Update download button platform
+                    const bottomDownloadBtn = document.getElementById('bottomDownloadBtn');
+                    bottomDownloadBtn.setAttribute('data-platform', tabId);
+                });
+            });
+        }
+        
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();
             setupFAQ();
             setupScrollReveal();
             setupDownloadModal();
+            setupTabs();
             
             animateSteps();
             
