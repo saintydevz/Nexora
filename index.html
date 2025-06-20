@@ -8,6 +8,88 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
         
+        @property --a {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        .hero-image {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            padding: 0;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 30px var(--violet-glow));
+            background: repeating-conic-gradient(
+                from var(--a, 0deg),
+                #0000 0% 70%,
+                rgba(123, 45, 255, 0.5)
+            );
+            animation: a 2s linear infinite;
+        }
+
+        @keyframes a {
+            to { --a: 1turn }
+        }
+
+        .svg-filters {
+            position: fixed;
+            visibility: hidden;
+        }
+        
+        #download {
+            text-align: center;
+        }
+        
+        #download h2 {
+            position: relative;
+            display: inline-block;
+            font-size: clamp(1.5rem, 6vw, 2rem);
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+        }
+        
+        #download h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--violet), transparent);
+        }
+        
+        .download-section-title {
+            text-align: center !important;
+            width: 100% !important;
+            max-width: 800px !important;
+            margin: 0 auto 40px auto !important;
+            font-size: clamp(1.5rem, 6vw, 2rem) !important;
+            position: relative !important;
+            padding-bottom: 20px !important;
+            display: block !important;
+            left: auto !important;
+            transform: none !important;
+        }
+        
+        .download-section-title::after {
+            content: '' !important;
+            position: absolute !important;
+            bottom: 0 !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: 200px !important;
+            height: 3px !important;
+            background: linear-gradient(to right, transparent, var(--violet), transparent) !important;
+        }
+        
         :root {
             --dark: #0a0a1a;
             --darker: #050510;
@@ -23,6 +105,15 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
+        }
+        
+        .download-title {
+            text-align: center !important;
+            width: 100% !important;
+            display: block !important;
+            left: 0 !important;
+            transform: none !important;
+            margin: 0 auto 40px auto !important;
         }
         
         body {
@@ -162,9 +253,10 @@
             border: none;
             cursor: pointer;
             min-height: 44px;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 10px;
         }
         
         .download-btn:hover {
@@ -196,30 +288,49 @@
             transform: skew(-5deg);
             box-shadow: 0 0 10px var(--violet-glow);
             min-height: 44px;
+            min-width: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        
-        .tab::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: all 0.5s ease;
-            z-index: 0;
-        }
-        
-        .tab:hover::before { left: 100%; }
         
         .tab:hover {
             color: var(--violet-light);
             border-color: var(--violet);
             transform: skew(-5deg) scale(1.05) translateY(-3px);
             box-shadow: 0 0 20px var(--violet-glow);
+        }
+        
+        .tab span {
+            position: relative;
+            z-index: 1;
+            transform: skew(5deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .tab i {
+            position: absolute;
+            font-size: 1.2em;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .tab:hover i {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .tab:hover .tab-text {
+            opacity: 0;
+            transform: scale(1.5);
+        }
+        
+        .tab .tab-text {
+            transition: all 0.3s ease;
         }
         
         .tab.active {
@@ -233,27 +344,6 @@
         @keyframes pulseTab {
             0%, 100% { box-shadow: 0 0 25px var(--violet-glow); }
             50% { box-shadow: 0 0 35px var(--violet-glow); }
-        }
-        
-        .tab span {
-            position: relative;
-            z-index: 1;
-            transform: skew(5deg);
-        }
-        
-        .tab-particle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: var(--violet-light);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: tabParticle 1s ease-out forwards;
-        }
-        
-        @keyframes tabParticle {
-            0% { opacity: 1; transform: translate(0, 0) scale(1); }
-            100% { opacity: 0; transform: translate(calc(var(--dx) * 50px), calc(var(--dy) * 50px)) scale(0.5); }
         }
         
         .tab-content { display: none; z-index: 1; }
@@ -316,9 +406,10 @@
             transition: all 0.3s ease;
             border: 2px solid var(--violet);
             min-height: 44px;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 10px;
         }
         
         .secondary-btn:hover {
@@ -331,19 +422,51 @@
             animation: floatImage 4s ease-in-out infinite;
             margin-top: 30px;
             width: 100%;
-            max-width: 400px;
+            max-width: 600px;
+            padding: 20px;
         }
-        
-        @keyframes floatImage {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(90deg, 
+                var(--violet) 0%, 
+                var(--violet-light) 25%, 
+                var(--violet) 50%, 
+                var(--violet-light) 75%, 
+                var(--violet) 100%
+            );
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderRotate 4s linear infinite;
+            background-size: 300% 100%;
         }
-        
+
+        @keyframes borderRotate {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 150% 0%; }
+        }
+
         .hero-image img {
             width: 100%;
             height: auto;
             object-fit: contain;
             filter: drop-shadow(0 0 20px var(--violet-glow));
+            border-radius: 15px;
+        }
+
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
         
         .glow {
@@ -390,41 +513,57 @@
         
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         
         .feature-card {
             background: rgba(20, 20, 40, 0.5);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 15px;
+            padding: 35px;
             transition: all 0.3s ease;
             border: 1px solid rgba(123, 45, 255, 0.2);
             backdrop-filter: blur(8px);
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
         
         .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px var(--violet-glow);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--violet-glow);
             border-color: var(--violet);
         }
         
         .feature-icon {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--violet);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            background: rgba(123, 45, 255, 0.1);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
         }
         
         .feature-card h3 {
-            font-size: clamp(1.1rem, 4vw, 1.3rem);
-            margin-bottom: 10px;
+            font-size: clamp(1.2rem, 4vw, 1.4rem);
+            margin-bottom: 15px;
             color: var(--text-light);
         }
         
         .feature-card p {
-            font-size: clamp(0.85rem, 3vw, 0.9rem);
+            font-size: clamp(0.9rem, 3vw, 1rem);
             opacity: 0.8;
-            line-height: 1.5;
+            line-height: 1.6;
         }
         
         .ratings {
@@ -647,7 +786,7 @@
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
@@ -664,7 +803,7 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             margin-bottom: 20px;
         }
         
@@ -809,6 +948,7 @@
             text-decoration: none;
             color: var(--text);
             min-height: 48px;
+            gap: 12px;
         }
         
         .download-option:hover {
@@ -906,7 +1046,7 @@
             .hero h1 { font-size: 3.5rem; }
             .hero p { font-size: 1.1rem; }
             .hero-btns { justify-content: flex-start; }
-            .hero-image { margin-top: 0; max-width: 500px; }
+            .hero-image { margin-top: 0; max-width: 700px; }
             .section-title { font-size: 2.5rem; }
             .features { gap: 30px; }
             .feature-card { padding: 30px; }
@@ -947,9 +1087,243 @@
             .option-content h3 { font-size: 0.95rem; }
             .option-content p { font-size: 0.7rem; }
         }
+        
+        .download-section {
+            text-align: center;
+            padding: 60px 5%;
+        }
+        
+        .download-section .section-title {
+            display: inline-block;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        /* Enhanced spacing styles */
+        .download-btn, .secondary-btn {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 10px !important;
+        }
+        
+        .download-option {
+            gap: 12px !important;
+        }
+        
+        .hero-btns {
+            gap: 20px !important;
+        }
+        
+        .footer-links {
+            gap: 25px !important;
+        }
+        
+        .social-links {
+            gap: 25px !important;
+        }
+        
+        .feature-card {
+            padding: 25px !important;
+        }
+
+        @media (max-width: 1200px) {
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .features {
+                grid-template-columns: 1fr;
+                padding: 0 15px;
+            }
+            .feature-card {
+                padding: 25px;
+                min-height: auto;
+            }
+        }
+
+        /* Enhanced Features Layout */
+        #features .features {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 30px !important;
+            max-width: 1400px !important;
+            margin: 0 auto !important;
+            padding: 0 20px !important;
+        }
+        
+        #features .feature-card {
+            background: rgba(20, 20, 40, 0.5) !important;
+            border-radius: 15px !important;
+            padding: 35px !important;
+            transition: all 0.3s ease !important;
+            border: 1px solid rgba(123, 45, 255, 0.2) !important;
+            backdrop-filter: blur(8px) !important;
+            min-height: 280px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+        }
+        
+        #features .feature-icon {
+            font-size: 2.5rem !important;
+            margin-bottom: 25px !important;
+            background: rgba(123, 45, 255, 0.1) !important;
+            width: 80px !important;
+            height: 80px !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        
+        #features .feature-card h3 {
+            font-size: clamp(1.2rem, 4vw, 1.4rem) !important;
+            margin-bottom: 15px !important;
+        }
+        
+        #features .feature-card p {
+            font-size: clamp(0.9rem, 3vw, 1rem) !important;
+            line-height: 1.6 !important;
+        }
+
+        @media (max-width: 1200px) {
+            #features .features {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #features .features {
+                grid-template-columns: 1fr !important;
+                padding: 0 15px !important;
+            }
+            #features .feature-card {
+                padding: 25px !important;
+                min-height: auto !important;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 5px 15px var(--violet-glow); }
+            50% { box-shadow: 0 5px 30px var(--violet-glow); }
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { border-color: rgba(123, 45, 255, 0.2); }
+            50% { border-color: var(--violet); }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease backwards;
+        }
+
+        .animate-floatIcon {
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        .animate-glowPulse {
+            animation: glowPulse 2s infinite;
+        }
+
+        .animate-borderGlow {
+            animation: borderGlow 3s infinite;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+
+        /* Hero Image Animations */
+        @keyframes borderGlow {
+            0%, 100% {
+                border-width: 2px;
+                box-shadow: 0 0 20px var(--violet-glow);
+            }
+            50% {
+                border-width: 3px;
+                box-shadow: 0 0 40px var(--violet-glow);
+            }
+        }
+
+        @keyframes rotateBorder {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hero-image-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            padding: 0;
+        }
+
+        .hero-image-border {
+            display: none;
+        }
+
+        .hero-image-border::before {
+            display: none;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 30px var(--violet-glow));
+            background: repeating-conic-gradient(
+                from var(--a, 0deg),
+                #0000 0% 70%,
+                rgba(123, 45, 255, 0.5)
+            );
+            animation: a 2s linear infinite;
+        }
+
+        @keyframes a {
+            to { --a: 1turn }
+        }
     </style>
 </head>
 <body>
+    <svg class="svg-filters" width="0" height="0" aria-hidden="true">
+        <filter id="glow-0" x="-25%" y="-25%" width="150%" height="150%">
+            <feComponentTransfer>
+                <feFuncA type="table" tableValues="0 2 0"/>
+            </feComponentTransfer>
+            <feGaussianBlur stdDeviation="1.5"/>
+            <feComponentTransfer result="rond">
+                <feFuncA type="table" tableValues="-1.5 2.5"/>
+            </feComponentTransfer>
+            <feMorphology operator="dilate" radius="3"/>
+            <feGaussianBlur stdDeviation="6"/>
+            <feBlend in="rond" result="glow"/>
+            <feComponentTransfer in="SourceGraphic">
+                <feFuncA type="table" tableValues="0 0 1"/>
+            </feComponentTransfer>
+            <feBlend in2="glow"/>
+        </filter>
+    </svg>
+    
     <div class="moving-bg">
         <div class="bg-circle"></div>
         <div class="bg-circle"></div>
@@ -957,66 +1331,6 @@
     </div>
     
     <div class="particles" id="particles"></div>
-    
-    <div class="modal-overlay" id="downloadModal">
-        <div class="download-modal">
-            <button class="modal-close" id="closeModal">×</button>
-            <div class="modal-glow modal-glow-1"></div>
-            <div class="modal-glow modal-glow-2"></div>
-            
-            <h2>Choose Download Method</h2>
-            <div class="download-options" id="windowsDownloads">
-                <a href="https://link-center.net/1232989/mWvpOvXLVRn2" class="download-option" target="_blank">
-                    <i class="fas fa-link"></i>
-                    <div class="option-content">
-                        <h3>Linkvertise - Windows Executor</h3>
-                        <p>Complete a quick offer to download Nexora Executor for Windows</p>
-                    </div>
-                </a>
-                <a href="https://work.ink/1YnT/nexorapc" class="download-option" target="_blank">
-                    <i class="fas fa-bolt"></i>
-                    <div class="option-content">
-                        <h3>Work Ink - Windows Executor</h3>
-                        <p>Direct download for Nexora Executor for Windows with no offers</p>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="download-options" id="androidDownloads">
-                <a href="https://link-center.net/1232989/android-executor" class="download-option" target="_blank">
-                    <i class="fas fa-link"></i>
-                    <div class="option-content">
-                        <h3>Linkvertise - Android Executor</h3>
-                        <p>Complete a quick offer to download Nexora Executor for Android</p>
-                    </div>
-                </a>
-                <a href="https://work.ink/1YnT/nexora-android" class="download-option" target="_blank">
-                    <i class="fas fa-bolt"></i>
-                    <div class="option-content">
-                        <h3>Work Ink - Android Executor</h3>
-                        <p>Direct download for Nexora Executor for Android with no offers</p>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="download-options" id="serverSideDownloads">
-                <a href="https://link-center.net/1232989/AuDxhc65fUjn" class="download-option" target="_blank">
-                    <i class="fas fa-server"></i>
-                    <div class="option-content">
-                        <h3>Linkvertise - Server Script</h3>
-                        <p>Complete a quick offer to download Server-Side Script</p>
-                    </div>
-                </a>
-                <a href="https://workink.net/1YnT/t4vr1bxt" class="download-option" target="_blank">
-                    <i class="fas fa-code"></i>
-                    <div class="option-content">
-                        <h3>Work Ink - Server Script</h3>
-                        <p>Direct download for Server-Side Script with no offers</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
     
     <header>
         <a href="#" class="logo">
@@ -1030,18 +1344,30 @@
             </button>
             <nav id="navMenu">
                 <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#ratings">Ratings</a></li>
-                    <li><a href="#how-to-use">How to Use</a></li>
-                    <li><a href="#faq">FAQ</a></li>
+
                 </ul>
                 <div class="tab-container" id="mobileTabContainer">
-                    <div class="tab active" data-tab="windows"><span>Windows</span></div>
-                    <div class="tab" data-tab="android"><span>Android</span></div>
-                    <div class="tab" data-tab="serverSide"><span>Server-Side</span></div>
+                    <div class="tab active" data-tab="windows">
+                        <span>
+                            <i class="fab fa-windows"></i>
+                            <span class="tab-text">Windows</span>
+                        </span>
+                    </div>
+                    <div class="tab" data-tab="android">
+                        <span>
+                            <i class="fab fa-android"></i>
+                            <span class="tab-text">Android</span>
+                        </span>
+                    </div>
+                    <div class="tab" data-tab="serverSide">
+                        <span>
+                            <i class="fas fa-server"></i>
+                            <span class="tab-text">Server-Side</span>
+                        </span>
+                    </div>
                 </div>
             </nav>
-            <a href="#" class="download-btn" id="downloadBtn" data-platform="windows">
+            <a href="https://github.com/saintydevz/Nexora/releases/download/asdasdasd/NexoraBoot.exe" class="download-btn" target="_blank">
                 Download Now
             </a>
         </div>
@@ -1053,87 +1379,117 @@
                 <h1>Unleash the Power of Roblox with Nexora on Windows</h1>
                 <p>The most advanced and reliable Roblox executor for Windows with cutting-edge features, unmatched performance, and a sleek dark-violet interface that stands out from the crowd.</p>
                 <div class="hero-btns">
-                    <a href="#" class="download-btn" id="heroDownloadBtnWindows" data-platform="windows">
-                        <i class="fas fa-download"></i> Download Now
+                    <a href="https://github.com/saintydevz/Nexora/releases/download/asdasdasd/NexoraBoot.exe" class="download-btn" target="_blank">
+                        <i class="fas fa-download"></i>
+                        <span>Download Now</span>
                     </a>
                     <a href="#features" class="secondary-btn">
-                        <i class="fas fa-star"></i> Explore Features
+                        <i class="fas fa-star"></i>
+                        <span>Explore Features</span>
                     </a>
                 </div>
             </div>
+
+            <svg width="0" height="0" aria-hidden="true">
+                <filter id="glow-0" x="-25%" y="-25%" width="150%" height="150%">
+                    <feComponentTransfer>
+                        <feFuncA type="table" tableValues="0 2 0"/>
+                    </feComponentTransfer>
+                    <feGaussianBlur stdDeviation="1.5"/>
+                    <feComponentTransfer result="rond">
+                        <feFuncA type="table" tableValues="-1.5 2.5"/>
+                    </feComponentTransfer>
+                    <feMorphology operator="dilate" radius="3"/>
+                    <feGaussianBlur stdDeviation="6"/>
+                    <feBlend in="rond" result="glow"/>
+                    <feComponentTransfer in="SourceGraphic">
+                        <feFuncA type="table" tableValues="0 0 1"/>
+                    </feComponentTransfer>
+                    <feBlend in2="glow"/>
+                </filter>
+            </svg>
+
             <div class="hero-image">
                 <img src="https://i.ibb.co/N2GzVzmx/Screenshot-2025-06-11-081801.png" alt="Nexora Executor Interface">
-                <div class="glow glow-1"></div>
-                <div class="glow glow-2"></div>
             </div>
+
+            <style>
+                @property --a {
+                    syntax: '<angle>';
+                    initial-value: 0deg;
+                    inherits: false;
+                }
+
+                .hero-image {
+                    position: relative;
+                    width: 100%;
+                    max-width: 800px;
+                    padding: 0;
+                }
+
+                .hero-image img {
+                    width: 100%;
+                    height: auto;
+                    background: repeating-conic-gradient(
+                        from var(--a, 0deg),
+                        #0000 0% 70%,
+                        rgba(123, 45, 255, 0.5)
+                    );
+                    filter: url(#glow-0);
+                    animation: a 2s linear infinite;
+                }
+
+                @keyframes a {
+                    to { --a: 1turn }
+                }
+            </style>
         </section>
         
         <section id="features">
             <h2 class="section-title">Powerful Features</h2>
-            <div class="features">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
-                    <h3>Lightning Fast Execution</h3>
-                    <p>Experience unparalleled speed with our optimized execution engine that runs scripts faster than any other Windows executor.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Undetectable</h3>
-                    <p>Our advanced anti-ban system ensures you stay under the radar while enjoying all the benefits of scripting on Windows.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-code"></i></div>
-                    <h3>Lua Support</h3>
-                    <p>Full support for Lua with all standard libraries and additional Roblox-specific functions.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-plug"></i></div>
-                    <h3>Plugin System</h3>
-                    <p>Extend functionality with our plugin system that allows community-created addons and scripts.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-palette"></i></div>
-                    <h3>Custom UI</h3>
-                    <p>Fully customizable interface with dark and violet themes, adjustable layouts, and personal preferences.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-sync-alt"></i></div>
-                    <h3>Auto Updates</h3>
-                    <p>Never worry about outdated versions - Nexora automatically updates to the latest stable release.</p>
-                </div>
-            </div>
-            <div class="ratings" id="ratings">
-                <h2 class="section-title">User Ratings</h2>
-                <div class="rating-cards">
-                    <div class="rating-card">
-                        <div class="rating-header">
-                            <img src="https://i.imgur.com/JqYeYnN.jpg" alt="User" class="rating-avatar">
-                            <div class="rating-name">ScriptMaster99</div>
+            <div style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-bolt"></i>
                         </div>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="rating-text">"Nexora is by far the best Windows executor I've used. The speed is incredible and it never gets detected!"</p>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Lightning Fast Execution</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Experience unparalleled speed with our optimized execution engine that runs scripts faster than any other Windows executor.</p>
                     </div>
-                    <div class="rating-card">
-                        <div class="rating-header">
-                            <img src="https://i.imgur.com/pXWxJ3F.jpg" alt="User" class="rating-avatar">
-                            <div class="rating-name">RobloxPro123</div>
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-shield-alt"></i>
                         </div>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="rating-text">"I've tried them all, but Nexora on Windows stands out with its amazing features and stability."</p>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Undetectable</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Our advanced anti-ban system ensures you stay under the radar while enjoying all the benefits of scripting on Windows.</p>
                     </div>
-                    <div class="rating-card">
-                        <div class="rating-header">
-                            <img src="https://i.imgur.com/Qt5vWbB.jpg" alt="User" class="rating-avatar">
-                            <div class="rating-name">ExploitQueen</div>
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-code"></i>
                         </div>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Lua Support</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Full support for Lua with all standard libraries and additional Roblox-specific functions.</p>
+                    </div>
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-plug"></i>
                         </div>
-                        <p class="rating-text">"Almost perfect! The Windows version is incredible and highly reliable."</p>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Plugin System</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Extend functionality with our plugin system that allows community-created addons and scripts.</p>
+                    </div>
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Custom UI</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Fully customizable interface with dark and violet themes, adjustable layouts, and personal preferences.</p>
+                    </div>
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Auto Updates</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Never worry about outdated versions - Nexora automatically updates to the latest stable release.</p>
                     </div>
                 </div>
             </div>
@@ -1146,28 +1502,28 @@
                     <div class="step-number">1</div>
                     <div class="step-content">
                         <h3>Download Nexora</h3>
-                        <p>Click the download button to get the latest version of Nexora for Windows. The download will start automatically.</p>
+                        <p>Click the download button to get the bootstrapper.</p>
                     </div>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
                     <div class="step-content">
                         <h3>Extract Files</h3>
-                        <p>After downloading, extract the zip file to a folder of your choice using WinRAR or 7-Zip.</p>
+                        <p>After downloading, extract the zip file and run Nexora-Boot.exe.</p>
                     </div>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
                     <div class="step-content">
-                        <h3>Run Nexora</h3>
-                        <p>Open the extracted folder and run Nexora.exe as administrator for best performance.</p>
+                        <h3>Follow Prompts</h3>
+                        <p>The bootstrapper will guide you through whole installation for ease.</p>
                     </div>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
                     <div class="step-content">
-                        <h3>Launch Roblox</h3>
-                        <p>Start your Roblox game and wait for it to fully load before proceeding to the next step.</p>
+                        <h3>Launch Nexora</h3>
+                        <p>You will find a shortcut that will start Nexora on your desktop.</p>
                     </div>
                 </div>
                 <div class="step">
@@ -1239,86 +1595,115 @@
                 <p>Experience the ultimate Roblox executor on Android with optimized performance, mobile-friendly interface, and powerful scripting capabilities.</p>
                 <div class="hero-btns">
                     <a href="#" class="download-btn" id="heroDownloadBtnAndroid" data-platform="android">
-                        <i class="fas fa-download"></i> Download Now
+                        <i class="fas fa-download"></i>
+                        <span>Download Now</span>
                     </a>
                     <a href="#features" class="secondary-btn">
-                        <i class="fas fa-star"></i> Explore Features
+                        <i class="fas fa-star"></i>
+                        <span>Explore Features</span>
                     </a>
                 </div>
             </div>
+            <svg width="0" height="0" aria-hidden="true">
+                <filter id="glow-0" x="-25%" y="-25%" width="150%" height="150%">
+                    <feComponentTransfer>
+                        <feFuncA type="table" tableValues="0 2 0"/>
+                    </feComponentTransfer>
+                    <feGaussianBlur stdDeviation="1.5"/>
+                    <feComponentTransfer result="rond">
+                        <feFuncA type="table" tableValues="-1.5 2.5"/>
+                    </feComponentTransfer>
+                    <feMorphology operator="dilate" radius="3"/>
+                    <feGaussianBlur stdDeviation="6"/>
+                    <feBlend in="rond" result="glow"/>
+                    <feComponentTransfer in="SourceGraphic">
+                        <feFuncA type="table" tableValues="0 0 1"/>
+                    </feComponentTransfer>
+                    <feBlend in2="glow"/>
+                </filter>
+            </svg>
+
             <div class="hero-image">
                 <img src="https://i.ibb.co/N2GzVzmx/Screenshot-2025-06-11-081801.png" alt="Nexora Executor Interface">
-                <div class="glow glow-1"></div>
-                <div class="glow glow-2"></div>
             </div>
+
+            <style>
+                @property --a {
+                    syntax: '<angle>';
+                    initial-value: 0deg;
+                    inherits: false;
+                }
+
+                .hero-image {
+                    position: relative;
+                    width: 100%;
+                    max-width: 800px;
+                    padding: 0;
+                }
+
+                .hero-image img {
+                    width: 100%;
+                    height: auto;
+                    background: repeating-conic-gradient(
+                        from var(--a, 0deg),
+                        #0000 0% 70%,
+                        rgba(123, 45, 255, 0.5)
+                    );
+                    filter: url(#glow-0);
+                    animation: a 2s linear infinite;
+                }
+
+                @keyframes a {
+                    to { --a: 1turn }
+                }
+            </style>
         </section>
         
         <section id="features">
             <h2 class="section-title">Powerful Features</h2>
-            <div class="features">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
-                    <h3>Mobile Optimized</h3>
-                    <p>Designed specifically for Android, with touch-friendly controls and optimized performance for mobile devices.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
-                    <h3>Fast Execution</h3>
-                    <p>Run scripts quickly and efficiently on Android with our streamlined execution engine.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Undetectable</h3>
-                    <p>Advanced anti-ban system tailored for Android to keep your scripting safe and secure.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-code"></i></div>
-                    <h3>Lua Support</h3>
-                    <p>Full support for Lua with Roblox-specific functions, optimized for mobile use.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-palette"></i></div>
-                    <h3>Mobile UI</h3>
-                    <p>Customizable, touch-friendly interface with dark and violet themes for a seamless mobile experience.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-sync-alt"></i></div>
-                    <h3>Auto Updates</h3>
-                    <p>Automatic updates ensure you always have the latest version of Nexora for Android.</p>
-                </div>
-            </div>
-            <div class="ratings" id="ratings">
-                <h2 class="section-title">User Ratings</h2>
-                <div class="rating-cards">
-                    <div class="rating-card">
-                        <div class="rating-header">
-                            <img src="https://i.imgur.com/JqYeYnN.jpg" alt="User" class="rating-avatar">
-                            <div class="rating-name">MobileScriptor</div>
+            <div style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-mobile-alt"></i>
                         </div>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="rating-text">"Nexora on Android is a game-changer! The mobile interface is super smooth and easy to use."</p>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Mobile Optimized</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Designed specifically for Android, with touch-friendly controls and optimized performance for mobile devices.</p>
                     </div>
-                    <div class="rating-card">
-                        <div class="rating-header">
-                            <img src="https://i.imgur.com/pXWxJ3F.jpg" alt="User" class="rating-avatar">
-                            <div class="rating-name">AndroidGamer</div>
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-bolt"></i>
                         </div>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="rating-text">"Finally, a reliable executor for Android! Nexora runs scripts perfectly."</p>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Fast Execution</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Run scripts quickly and efficiently on Android with our streamlined execution engine.</p>
                     </div>
-                    <div class="rating-card">
-                        <div class="rating-header">
-                            <img src="https://i.imgur.com/Qt5vWbB.jpg" alt="User" class="rating-avatar">
-                            <div class="rating-name">MobileExploit</div>
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-shield-alt"></i>
                         </div>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Undetectable</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Advanced anti-ban system tailored for Android to keep your scripting safe and secure.</p>
+                    </div>
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-code"></i>
                         </div>
-                        <p class="rating-text">"Great app for Android users. The touch controls are intuitive and execution is fast."</p>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Lua Support</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Full support for Lua with Roblox-specific functions, optimized for mobile use.</p>
+                    </div>
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Mobile UI</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Customizable, touch-friendly interface with dark and violet themes for a seamless mobile experience.</p>
+                    </div>
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Auto Updates</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Automatic updates ensure you always have the latest version of Nexora for Android.</p>
                     </div>
                 </div>
             </div>
@@ -1424,10 +1809,12 @@
                 <p>Execute powerful server-side scripts with Nexora, featuring automatic backdoor scanning and full support for require scripts.</p>
                 <div class="hero-btns">
                     <a href="#" class="download-btn" id="heroDownloadBtnServerSide" data-platform="serverSide">
-                        <i class="fas fa-download"></i> Download Now
+                        <i class="fas fa-download"></i>
+                        <span>Download Now</span>
                     </a>
                     <a href="#features" class="secondary-btn">
-                        <i class="fas fa-star"></i> Explore Features
+                        <i class="fas fa-star"></i>
+                        <span>Explore Features</span>
                     </a>
                 </div>
             </div>
@@ -1440,65 +1827,42 @@
         
         <section id="features">
             <h2 class="section-title">Powerful Features</h2>
-            <div class="features">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-server"></i></div>
-                    <h3>Server-Side Execution</h3>
-                    <p>Execute server-side scripts with full support for require scripts and advanced functionality.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-search"></i></div>
-                    <h3>Backdoor Scanner</h3>
-                    <p>Automatically scans for game backdoors. If none are found, the game is secure from server-side exploits.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-code"></i></div>
-                    <h3>Lua Support</h3>
-                    <p>Full support for Lua with server-side specific functions and libraries.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Secure Execution</h3>
-                    <p>Designed to minimize detection risks during server-side script execution.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-sync-alt"></i></div>
-                    <h3>Auto Updates</h3>
-                    <p>Automatic updates to ensure compatibility with the latest Roblox server updates.</p>
-                </div>
-            </div>
-            <div class="ratings" id="ratings">
-                <h2 class="section-title">User Ratings</h2>
-                <div class="rating-cards">
-                    <div class="rating-card">
-                        <div class="rating-header">
-                            <img src="https://i.imgur.com/JqYeYnN.jpg" alt="User" class="rating-avatar">
-                            <div class="rating-name">ServerScriptor</div>
+            <div style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-server"></i>
                         </div>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="rating-text">"The server-side execution is flawless. The backdoor scanner is a lifesaver!"</p>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Server-Side Execution</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Execute server-side scripts with full support for require scripts and advanced functionality.</p>
                     </div>
-                    <div class="rating-card">
-                        <div class="rating-header">
-                            <img src="https://i.imgur.com/pXWxJ3F.jpg" alt="User" class="rating-avatar">
-                            <div class="rating-name">BackdoorMaster</div>
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-search"></i>
                         </div>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="rating-text">"Nexora's server-side capabilities are unmatched. Highly reliable and powerful."</p>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Backdoor Scanner</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Automatically scans for game backdoors. If none are found, the game is secure from server-side exploits.</p>
                     </div>
-                    <div class="rating-card">
-                        <div class="rating-header">
-                            <img src="https://i.imgur.com/Qt5vWbB.jpg" alt="User" class="rating-avatar">
-                            <div class="rating-name">ExploitDev</div>
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-code"></i>
                         </div>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Lua Support</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Full support for Lua with server-side specific functions and libraries.</p>
+                    </div>
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-shield-alt"></i>
                         </div>
-                        <p class="rating-text">"The backdoor scanner works perfectly, and server-side execution is top-notch."</p>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Secure Execution</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Designed to minimize detection risks during server-side script execution.</p>
+                    </div>
+                    <div style="background: rgba(20, 20, 40, 0.5); border-radius: 15px; padding: 35px; transition: all 0.3s ease; border: 1px solid rgba(123, 45, 255, 0.2); backdrop-filter: blur(8px); min-height: 280px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <div style="font-size: 2.5rem; color: var(--violet); margin-bottom: 25px; background: rgba(123, 45, 255, 0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3 style="font-size: clamp(1.2rem, 4vw, 1.4rem); margin-bottom: 15px; color: var(--text-light);">Auto Updates</h3>
+                        <p style="font-size: clamp(0.9rem, 3vw, 1rem); opacity: 0.8; line-height: 1.6;">Automatic updates to ensure compatibility with the latest Roblox server updates.</p>
                     </div>
                 </div>
             </div>
@@ -1590,11 +1954,14 @@
         </section>
     </div>
     
-    <section id="download" style="text-align: center; padding: 60px 5%;">
-        <h2 class="section-title">Ready to Experience Nexora?</h2>
+    <section id="download" style="padding: 60px 5%; display: flex; flex-direction: column; align-items: center;">
+        <h2 style="font-size: clamp(1.5rem, 6vw, 2rem); margin: 0 auto 40px; position: relative; padding-bottom: 20px;">Ready to Experience Nexora?
+            <span style="content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 200px; height: 3px; background: linear-gradient(to right, transparent, var(--violet), transparent); display: block;"></span>
+        </h2>
         <p style="max-width: 600px; margin: 0 auto 30px; font-size: clamp(0.9rem, 3.5vw, 1rem);">Join thousands of users who have unlocked the full potential of Roblox with Nexora's powerful execution capabilities.</p>
-        <a href="#" class="download-btn" id="bottomDownloadBtn" data-platform="windows" style="font-size: clamp(0.9rem, 3.5vw, 1rem); padding: 12px 30px;">
-            <i class="fas fa-download"></i> Download Nexora v2.0.0
+        <a href="https://github.com/saintydevz/Nexora/releases/download/asdasdasd/NexoraBoot.exe" class="download-btn" target="_blank" style="font-size: clamp(0.9rem, 3.5vw, 1rem); padding: 12px 30px; display: inline-flex; align-items: center; gap: 12px;">
+            <i class="fas fa-download" style="font-size: 1.2em;"></i>
+            <span>Download Nexora v2.0.0</span>
         </a>
     </section>
     
@@ -1614,7 +1981,7 @@
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="#"><i class="fab fa-github"></i></a>
         </div>
-        <p class="copyright">© 2023 Nexora Executor. All rights reserved. Not affiliated with Roblox Corporation.</p>
+        <p class="copyright">© 2025 Nexora Executor. All Rights Reserved.</p>
     </footer>
     
     <script>
@@ -1708,7 +2075,6 @@
             try {
                 const tabs = document.querySelectorAll('.tab');
                 const tabContents = document.querySelectorAll('.tab-content');
-                const downloadButtons = document.querySelectorAll('.download-btn');
                 
                 tabs.forEach(tab => {
                     tab.addEventListener('click', () => {
@@ -1718,48 +2084,10 @@
                         createTabParticles(tab);
                         const tabId = tab.getAttribute('data-tab');
                         document.getElementById(tabId).classList.add('active');
-                        downloadButtons.forEach(btn => {
-                            btn.setAttribute('data-platform', tabId);
-                        });
                     });
                 });
             } catch (error) {
                 console.error('Error setting up tabs:', error);
-            }
-        }
-        
-        function setupModal() {
-            try {
-                const modal = document.getElementById('downloadModal');
-                const closeModalBtn = document.getElementById('closeModal');
-                const downloadButtons = document.querySelectorAll('.download-btn');
-                const downloadOptions = {
-                    windows: document.getElementById('windowsDownloads'),
-                    android: document.getElementById('androidDownloads'),
-                    serverSide: document.getElementById('serverSideDownloads')
-                };
-                
-                downloadButtons.forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const platform = button.getAttribute('data-platform');
-                        Object.values(downloadOptions).forEach(option => option.classList.remove('active'));
-                        downloadOptions[platform].classList.add('active');
-                        modal.classList.add('active');
-                    });
-                });
-                
-                closeModalBtn.addEventListener('click', () => {
-                    modal.classList.remove('active');
-                });
-                
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        modal.classList.remove('active');
-                    }
-                });
-            } catch (error) {
-                console.error('Error setting up modal:', error);
             }
         }
         
@@ -1784,7 +2112,6 @@
             try {
                 createParticles();
                 setupTabs();
-                setupModal();
                 setupFAQ();
                 setupHamburger();
                 animateSteps();
