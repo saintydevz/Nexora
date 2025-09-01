@@ -196,7 +196,7 @@ export default function NexoraHomepage() {
               size="lg"
               className="cursor-interactive animate-pulse-glow text-lg px-8 py-6"
               onClick={() =>
-                window.open("https://github.com/saintydevz/Nexora/releases/download/asdasdasd/NexoraBoot.exe", "_blank")
+                window.open("https://link-target.net/1232989/A9eZE1OurTDg", "_blank")
               }
             >
               <Download className="h-5 w-5 mr-2" />
@@ -326,7 +326,7 @@ export default function NexoraHomepage() {
                   size="lg"
                   className="cursor-interactive animate-pulse-glow text-lg px-8 py-6"
                   onClick={() =>
-                    window.open("https://github.com/saintydevz/Nexora/releases/download/asdasdasd/NexoraBoot.exe", "_blank")
+                    window.open("https://link-target.net/1232989/A9eZE1OurTDg", "_blank")
                   }
                 >
                   <Download className="h-5 w-5 mr-2" />
