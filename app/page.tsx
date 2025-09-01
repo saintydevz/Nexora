@@ -54,9 +54,9 @@ export default function NexoraHomepage() {
 
   const faqs = [
     {
-      question: "Is Nexora completely safe and detected?",
+      question: "Is Nexora completely safe and undedcted FUCK?",
       answer:
-        "Nexora employs state-of-the-art anti-detection algorithms and memory protection techniques. Our Level 8 internal execution ensures maximum stealth while maintaining full functionality. However, always use any third-party tools responsibly and at your own discretion.",
+        "nuh uh zur.",
     },
     {
       question: "What does 98% UNC/SUNC compatibility mean?",
@@ -179,7 +179,7 @@ export default function NexoraHomepage() {
           <div className="flex flex-wrap justify-center gap-6 mb-8 relative z-10">
             <div className="flex items-center gap-2 bg-black/20 backdrop-blur-sm border border-violet-500/30 rounded-full px-4 py-2">
               <Shield className="h-4 w-4 text-violet-400" />
-              <span className="text-sm font-medium">Detected</span>
+              <span className="text-sm font-medium">OPEN AS FUCKING ADMINSATOR OKAY?</span>
             </div>
             <div className="flex items-center gap-2 bg-black/20 backdrop-blur-sm border border-violet-500/30 rounded-full px-4 py-2">
               <Zap className="h-4 w-4 text-violet-400" />
